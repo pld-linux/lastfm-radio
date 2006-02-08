@@ -13,7 +13,7 @@
      , m_playback( new Playback() )
      , m_timer( new QTimer() )
 -    , m_coverLoader( new CoverLoader( this, QApplication::applicationDirPath() + "/cache/" ) )
-+    , m_coverLoader( new CoverLoader( this, QDir::homeDirPath() + "/.last.fm/cache/" ) )
++    , m_coverLoader( new CoverLoader( this, QDir::homePath() + "/.last.fm/cache/" ) )
      , m_coverBuffer( new QBuffer() )
      , m_animation( new QMovie( QApplication::applicationDirPath() + "/data/progress_active.mng" ) )
      , m_proxyConnected( false )
