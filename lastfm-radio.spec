@@ -1,4 +1,4 @@
-%define		_snap	20060123
+%define		_snap	20060208
 Summary:	Last.fm Player
 Summary(pl):	Odtwarzacz Last.fm
 Name:		lastfm-player
@@ -7,8 +7,9 @@ Release:	0.%{_snap}.1
 License:	GPL v2
 Group:		X11/Applications/Multimedia
 Source0:	%{name}-%{version}-%{_snap}.tar.bz2
-# Source0-md5:	dfa85e9e0a4656f7cdccaa9424f8b9c4
+# Source0-md5:	a677e1eeb0ecc644421551685b1002be
 Patch0:		%{name}-build.patch
+Patch1:		%{name}-cachedir.patch
 URL:		http://www.last.fm/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
@@ -32,9 +33,9 @@ zale¿no¶ci od gustów muzycznych.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
-%{__sed} -i 's,../data,%{_datadir}/%{name}/data,g' src/*.ui
-%{__sed} -i 's,argv\[0\],"%{_datadir}/%{name}/",' src/main.cpp
+%{__sed} -i 's,QApplication::applicationDirPath(),QString("%{_datadir}/%{name}"),g' src/*.cpp
 
 %build
 export QTDIR=%{_prefix}
@@ -43,11 +44,12 @@ qmake
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}/data/buttons}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}/data/{buttons,watermarks}}
 
 install player $RPM_BUILD_ROOT%{_bindir}
+install data/*.{m3u,mng,png} $RPM_BUILD_ROOT%{_datadir}/%{name}/data
 install data/buttons/*.png $RPM_BUILD_ROOT%{_datadir}/%{name}/data/buttons
-install data/*.{gif,m3u,png} $RPM_BUILD_ROOT%{_datadir}/%{name}/data
+install data/watermarks/*.png $RPM_BUILD_ROOT%{_datadir}/%{name}/data/watermarks
 
 %clean
 rm -rf $RPM_BUILD_ROOT
