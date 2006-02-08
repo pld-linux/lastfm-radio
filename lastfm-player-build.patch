@@ -1,25 +1,8 @@
-diff -U 3 -H -d -r -N -- lastfm-player.old/player.pro lastfm-player/player.pro
---- lastfm-player.old/player.pro	2006-01-23 12:11:22.000000000 +0100
-+++ lastfm-player/player.pro	2006-01-24 03:42:48.000000000 +0100
-@@ -50,6 +50,6 @@
- 		/sw/lib/libjpeg.a
+--- lastfm-player/player.pro.orig	2006-02-08 13:04:09.000000000 +0100
++++ lastfm-player/player.pro	2006-02-08 17:43:08.000000000 +0100
+@@ -60,5 +60,3 @@
  }
  
--QT += Network Xml
-+QT += network xml
- CONFIG += static
- CONFIG -= debug
-diff -U 3 -H -d -r -N -- lastfm-player.old/src/player.cpp lastfm-player/src/player.cpp
---- lastfm-player.old/src/player.cpp	2006-01-23 12:11:19.000000000 +0100
-+++ lastfm-player/src/player.cpp	2006-01-24 03:44:04.000000000 +0100
-@@ -100,7 +100,9 @@
-     setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
- 
-     m_dataPath = QFileInfo( dataPath ).absolutePath() + "/";
--    coverLoader = new CoverLoader( this, m_dataPath + "cache/" );
-+    char* cHome = getenv("HOME");
-+    QString cachePath = (cHome==NULL?"/tmp":cHome);
-+    coverLoader = new CoverLoader( this, cachePath + "/.last.fm/cache/" );
- 
-     #ifndef Q_WS_MAC
-     if ( !cli.isEmpty() && cli.length() > 9 )
+ QT += network xml
+-CONFIG += static
+-CONFIG += debug
