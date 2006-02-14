@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Last.fm Player
+Comment=Personalized radio stream player
+Comment[pl]=Odtwarzacz osobistego strumienia radiowego
+Exec=lastfm-player
+Icon=/usr/share/lastfm-player/data/icon.png
+Terminal=false
+Type=Application
+Categories=Qt;Audio;Player;
+Encoding=UTF-8
+# vi: encoding=utf-8
