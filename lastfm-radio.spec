@@ -1,13 +1,13 @@
-%define		_snap	20060214
+%define		_snap	20060220
 Summary:	Last.fm Player
 Summary(pl):	Odtwarzacz Last.fm
 Name:		lastfm-player
-Version:	1.1.4
+Version:	1.1.90
 Release:	0.%{_snap}.1
 License:	GPL v2
 Group:		X11/Applications/Multimedia
 Source0:	%{name}-%{version}-%{_snap}.tar.bz2
-# Source0-md5:	30dbffc7b5e5a9be685689ffc13503ce
+# Source0-md5:	05eb03759019e5a55bba3b23be6886fd
 Source1:	%{name}.desktop
 Patch0:		%{name}-cachedir.patch
 URL:		http://www.last.fm/
@@ -37,8 +37,7 @@ zale¿no¶ci od gustów muzycznych.
 %{__sed} -i 's,QApplication::applicationDirPath(),QString("%{_datadir}/%{name}"),g' src/*.cpp
 
 %build
-export QTDIR=%{_prefix}
-qmake
+qt4-qmake
 %{__make}
 
 %install
