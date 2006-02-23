@@ -37,7 +37,7 @@ zale¿no¶ci od gustów muzycznych.
 %{__sed} -i 's,QApplication::applicationDirPath(),QString("%{_datadir}/%{name}"),g' src/*.cpp
 
 %build
-qt4-qmake
+qmake
 %{__make}
 
 %install
