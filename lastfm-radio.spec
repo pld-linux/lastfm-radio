@@ -10,13 +10,14 @@ Source0:	%{name}-%{version}-%{_snap}.tar.bz2
 # Source0-md5:	05eb03759019e5a55bba3b23be6886fd
 Source1:	%{name}.desktop
 Patch0:		%{name}-cachedir.patch
+Patch1:		%{name}-gcc4.patch
 URL:		http://www.last.fm/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	qt4-build
-BuildRequires:	qt4-qmake
+BuildRequires:	qt4-qmake >= 4.1.1
 BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,11 +34,12 @@ zale¿no¶ci od gustów muzycznych.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 %{__sed} -i 's,QApplication::applicationDirPath(),QString("%{_datadir}/%{name}"),g' src/*.cpp
 
 %build
-qmake
+qt4-qmake
 %{__make}
 
 %install
