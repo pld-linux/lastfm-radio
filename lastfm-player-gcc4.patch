@@ -1,0 +1,11 @@
+--- lastfm-player/src/player.h.orig	2006-02-18 12:13:41.000000000 +0100
++++ lastfm-player/src/player.h	2006-02-27 20:21:15.833241000 +0100
+@@ -44,7 +44,7 @@
+         Player( QWidget *parent = 0, QString commandLine = QString( "" ) );
+         ~Player();
+ 
+-        static bool Player::transmitCli( QString parameter );
++        static bool transmitCli( QString parameter );
+ 
+ 
+     protected:
