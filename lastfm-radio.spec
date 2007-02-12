@@ -1,6 +1,6 @@
 %define		_snap	20060303
 Summary:	Last.fm Radio
-Summary(pl):	Odtwarzacz Last.fm
+Summary(pl.UTF-8):   Odtwarzacz Last.fm
 Name:		lastfm-radio
 Version:	1.1.90
 Release:	0.%{_snap}.1
@@ -27,10 +27,10 @@ This is a small application that plays you Last.fm radio - where each
 listener gets different songs, all picked automatically depending on
 your music taste.
 
-%description -l pl
-To jest ma≥a aplikacja odtwarzaj±ca radio Last.fm - gdzie kaødy
-s≥uchacz otrzymuje rÛøne piosenki, dobierane automatycznie w
-zaleøno∂ci od gustÛw muzycznych.
+%description -l pl.UTF-8
+To jest ma≈Ça aplikacja odtwarzajƒÖca radio Last.fm - gdzie ka≈ºdy
+s≈Çuchacz otrzymuje r√≥≈ºne piosenki, dobierane automatycznie w
+zale≈ºno≈õci od gust√≥w muzycznych.
 
 %prep
 %setup -q -n %{name}
