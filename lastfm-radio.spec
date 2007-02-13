@@ -1,6 +1,6 @@
 %define		_snap	20060303
 Summary:	Last.fm Radio
-Summary(pl.UTF-8):   Odtwarzacz Last.fm
+Summary(pl.UTF-8):	Odtwarzacz Last.fm
 Name:		lastfm-radio
 Version:	1.1.90
 Release:	0.%{_snap}.1
