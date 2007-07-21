@@ -1,24 +1,22 @@
-%define		_snap	20060303
 Summary:	Last.fm Radio
 Summary(pl.UTF-8):	Odtwarzacz Last.fm
 Name:		lastfm-radio
-Version:	1.1.90
-Release:	0.%{_snap}.1
+Version:	1.3.0.58
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Multimedia
-Source0:	%{name}-%{version}-%{_snap}.tar.bz2
-# Source0-md5:	4c3210d551d985299b6321eaf1d8c0ea
+Source0:	http://static.last.fm/client/Linux/last.fm-%{version}.src.tar.bz2
+# Source0-md5:	ba4c05af37006815a55eaa508169b6c2
 Source1:	%{name}.desktop
-Patch0:		lastfm-player-cachedir.patch
-Patch1:		lastfm-player-gcc4.patch
-URL:		http://www.last.fm/
+Patch0:	%{name}-fhs.patch
+URL:		http://www.last.fm/download/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
+BuildRequires:	QtSql-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake >= 4.1.0-1.95
-BuildRequires:	sed >= 4.0
 Obsoletes:	lastfm-player
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,11 +31,8 @@ słuchacz otrzymuje różne piosenki, dobierane automatycznie w
 zależności od gustów muzycznych.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n last.fm-%{version}
 %patch0 -p1
-%patch1 -p1
-
-%{__sed} -i 's,QApplication::applicationDirPath(),QString("%{_datadir}/%{name}"),g' src/*.cpp
 
 %build
 qt4-qmake
@@ -45,21 +40,32 @@ qt4-qmake
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}/data/{buttons,watermarks},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/%{name}/services,%{_datadir}/%{name}/data/{buttons,icons,i18n},%{_desktopdir}}
 
-install player $RPM_BUILD_ROOT%{_bindir}/lastfm-radio
-install data/*.{m3u,mng,png} $RPM_BUILD_ROOT%{_datadir}/%{name}/data
-install data/buttons/*.png $RPM_BUILD_ROOT%{_datadir}/%{name}/data/buttons
-install data/watermarks/*.png $RPM_BUILD_ROOT%{_datadir}/%{name}/data/watermarks
+install bin/last.fm.app $RPM_BUILD_ROOT%{_bindir}/last.fm
+install bin/data/*.{mng,png,gif} $RPM_BUILD_ROOT%{_datadir}/%{name}/data
+install bin/data/buttons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/buttons
+install bin/data/icons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/icons
+install bin/libLastFmTools.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}
+install bin/services/*.so $RPM_BUILD_ROOT%{_libdir}/%{name}/services
+install i18n/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/i18n
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%postun -p /sbin/ldconfig
+
+%post -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog
-%attr(755,root,root) %{_bindir}/lastfm-radio
+%attr(755,root,root) %{_bindir}/last.fm
 %{_datadir}/%{name}
+%attr(755,root,root) %{_libdir}/*.so.*.*.*
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/services
+%attr(755,root,root) %{_libdir}/%{name}/services/*.so
 %{_desktopdir}/*.desktop
