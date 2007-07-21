@@ -2,7 +2,7 @@
 Name=Last.fm Radio
 Comment=Personalized radio stream player
 Comment[pl]=Odtwarzacz osobistego strumienia radiowego
-Exec=lastfm-radio
+Exec=last.fm
 Icon=/usr/share/lastfm-radio/data/icon.png
 Terminal=false
 Type=Application
