@@ -8,7 +8,7 @@ Group:		X11/Applications/Multimedia
 Source0:	http://static.last.fm/client/Linux/last.fm-%{version}.src.tar.bz2
 # Source0-md5:	ba4c05af37006815a55eaa508169b6c2
 Source1:	%{name}.desktop
-Patch0:	%{name}-fhs.patch
+Patch0:		%{name}-fhs.patch
 URL:		http://www.last.fm/download/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
@@ -16,6 +16,7 @@ BuildRequires:	QtSql-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	qt4-build
+BuildRequires:	qt4-linguist
 BuildRequires:	qt4-qmake >= 4.1.0-1.95
 Obsoletes:	lastfm-player
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -38,6 +39,9 @@ zależności od gustów muzycznych.
 qt4-qmake
 %{__make}
 
+cd i18n
+%{_libdir}/qt4/bin/lrelease lastfm_*.ts
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/%{name}/services,%{_datadir}/%{name}/data/{buttons,icons,i18n},%{_desktopdir}}
@@ -48,24 +52,23 @@ install bin/data/buttons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/buttons
 install bin/data/icons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/icons
 install bin/libLastFmTools.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}
 install bin/services/*.so $RPM_BUILD_ROOT%{_libdir}/%{name}/services
-install i18n/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/i18n
+install i18n/lastfm_*.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/data/i18n
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun -p /sbin/ldconfig
-
-%post -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_bindir}/last.fm
-%{_datadir}/%{name}
-%attr(755,root,root) %{_libdir}/*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libLastFmTools.so.*.*.*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/services
 %attr(755,root,root) %{_libdir}/%{name}/services/*.so
+%{_datadir}/%{name}
 %{_desktopdir}/*.desktop
