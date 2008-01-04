@@ -15,9 +15,9 @@ BuildRequires:	QtNetwork-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	alsa-lib-devel
-BuildRequires:	qt4-build
-BuildRequires:	qt4-linguist
-BuildRequires:	qt4-qmake >= 4.1.0-1.95
+BuildRequires:	qt4-build >= 4.3.3-3
+BuildRequires:	qt4-linguist >= 4.3.3-3
+BuildRequires:	qt4-qmake >= 4.3.3-3
 Obsoletes:	lastfm-player
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -36,11 +36,11 @@ zależności od gustów muzycznych.
 %patch0 -p1
 
 %build
-qt4-qmake
+qmake-qt4
 %{__make}
 
 cd i18n
-%{_libdir}/qt4/bin/lrelease lastfm_*.ts
+lrelease-qt4 lastfm_*.ts
 
 %install
 rm -rf $RPM_BUILD_ROOT
