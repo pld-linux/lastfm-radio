@@ -1,12 +1,12 @@
 Summary:	Last.fm Radio
 Summary(pl.UTF-8):	Odtwarzacz Last.fm
 Name:		lastfm-radio
-Version:	1.3.1.0
+Version:	1.4.2.58240
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Multimedia
-Source0:	http://static.last.fm/client/Linux/last.fm-%{version}.src.tar.bz2
-# Source0-md5:	78d97b69a9ffe6133b94502e81a776a7
+Source0:	http://cdn.last.fm/client/src/last.fm-%{version}.src.tar.bz2
+# Source0-md5:	977d349736c9cd73e4b028c392898467
 Source1:	%{name}.desktop
 Patch0:		%{name}-fhs.patch
 URL:		http://www.last.fm/download/
@@ -15,6 +15,8 @@ BuildRequires:	QtNetwork-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	fftw3-single-devel
+BuildRequires:	libgpod-devel
 BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-linguist >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
@@ -33,7 +35,7 @@ zależności od gustów muzycznych.
 
 %prep
 %setup -q -n last.fm-%{version}
-%patch0 -p1
+#%patch0 -p1
 
 %build
 qmake-qt4
@@ -46,7 +48,7 @@ lrelease-qt4 lastfm_*.ts
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/%{name}/services,%{_datadir}/%{name}/data/{buttons,icons,i18n},%{_desktopdir}}
 
-install bin/last.fm.app $RPM_BUILD_ROOT%{_bindir}/last.fm
+install bin/last.fm $RPM_BUILD_ROOT%{_bindir}/last.fm
 install bin/data/*.{mng,png,gif} $RPM_BUILD_ROOT%{_datadir}/%{name}/data
 install bin/data/buttons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/buttons
 install bin/data/icons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/icons
