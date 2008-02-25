@@ -2,7 +2,7 @@ Summary:	Last.fm Radio
 Summary(pl.UTF-8):	Odtwarzacz Last.fm
 Name:		lastfm-radio
 Version:	1.4.2.58240
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Multimedia
 Source0:	http://cdn.last.fm/client/src/last.fm-%{version}.src.tar.bz2
@@ -52,7 +52,7 @@ install bin/last.fm $RPM_BUILD_ROOT%{_bindir}/last.fm
 install bin/data/*.{mng,png,gif} $RPM_BUILD_ROOT%{_datadir}/%{name}/data
 install bin/data/buttons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/buttons
 install bin/data/icons/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/icons
-install bin/libLastFmTools.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}
+install bin/*.so.1.0.0 $RPM_BUILD_ROOT%{_libdir}
 install bin/services/*.so $RPM_BUILD_ROOT%{_libdir}/%{name}/services
 install i18n/lastfm_*.qm $RPM_BUILD_ROOT%{_datadir}/%{name}/data/i18n
 
@@ -68,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_bindir}/last.fm
-%attr(755,root,root) %{_libdir}/libLastFmTools.so.*.*.*
+%attr(755,root,root) %{_libdir}/*.so.1.0.0
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/services
 %attr(755,root,root) %{_libdir}/%{name}/services/*.so
