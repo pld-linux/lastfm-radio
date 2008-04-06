@@ -1,0 +1,11 @@
+--- src/libFingerprint/libFingerprint.pro	2007-12-18 15:18:19.000000000 +0100
++++ src/libFingerprint/libFingerprint.pro-new	2008-04-06 10:25:14.141060284 +0200
+@@ -40,7 +40,7 @@
+ 
+ unix:!mac {
+     LIBPATH += $$BUILD_DIR/../fplib
+-    LIBS += $$ROOT_DIR/build/fplib/libfplib$${EXT}.a -lsamplerate -lfftw3f
++    LIBS += $$ROOT_DIR/build/fplib/libfplib$${EXT}.a -lsamplerate -lfftw3f -lmad
+ }
+ 
+ win32 {
