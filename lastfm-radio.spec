@@ -9,6 +9,8 @@ Source0:	http://cdn.last.fm/client/src/last.fm-%{version}.src.tar.bz2
 # Source0-md5:	977d349736c9cd73e4b028c392898467
 Source1:	%{name}.desktop
 Patch0:		%{name}-fhs.patch
+Patch1:		%{name}-libmad.patch
+Patch2:		%{name}-64bitinclude.patch
 URL:		http://www.last.fm/download/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
@@ -37,11 +39,12 @@ zależności od gustów muzycznych.
 %prep
 %setup -q -n last.fm-%{version}
 #%patch0 -p1
+%patch1 -p0
+%patch2 -p0
 
 %build
 qmake-qt4
-%{__make} \
-	LIBS="-lmad"
+%{__make}
 
 cd i18n
 lrelease-qt4 lastfm_*.ts
