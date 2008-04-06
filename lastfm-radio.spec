@@ -17,6 +17,7 @@ BuildRequires:	QtXml-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	fftw3-single-devel
 BuildRequires:	libgpod-devel
+BuildRequires:	libmad-devel
 BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-linguist >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
