@@ -38,9 +38,11 @@ zależności od gustów muzycznych.
 
 %prep
 %setup -q -n last.fm-%{version}
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p0
 %patch2 -p0
+
+%{__sed} -i -e 's#@LIB@#%{_libdir}#g' src/container.cpp src/libMoose/MooseCommon.cpp
 
 %build
 qmake-qt4
