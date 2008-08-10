@@ -2,7 +2,7 @@ Summary:	Last.fm Radio
 Summary(pl.UTF-8):	Odtwarzacz Last.fm
 Name:		lastfm-radio
 Version:	1.4.2.58240
-Release:	0.2
+Release:	0.3
 License:	GPL v2
 Group:		X11/Applications/Multimedia
 Source0:	http://cdn.last.fm/client/src/last.fm-%{version}.src.tar.bz2
@@ -11,6 +11,7 @@ Source1:	%{name}.desktop
 Patch0:		%{name}-fhs.patch
 Patch1:		%{name}-libmad.patch
 Patch2:		%{name}-64bitinclude.patch
+Patch3:		%{name}-gcc43.patch
 URL:		http://www.last.fm/download/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
@@ -41,6 +42,7 @@ zależności od gustów muzycznych.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1
 
 %{__sed} -i -e 's#@LIB@#%{_libdir}#g' src/container.cpp src/libMoose/MooseCommon.cpp
 
