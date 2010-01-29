@@ -2,7 +2,7 @@ Summary:	Last.fm Radio
 Summary(pl.UTF-8):	Odtwarzacz Last.fm
 Name:		lastfm-radio
 Version:	1.4.2.58240
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Multimedia
 Source0:	http://cdn.last.fm/client/src/last.fm-%{version}.src.tar.bz2
