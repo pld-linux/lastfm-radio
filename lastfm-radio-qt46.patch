@@ -1,0 +1,15 @@
+--- last.fm-1.4.2.58240/src/libUnicorn/draglabel.cpp~	2007-12-18 15:18:19.000000000 +0100
++++ last.fm-1.4.2.58240/src/libUnicorn/draglabel.cpp	2010-09-01 15:12:30.000000000 +0200
+@@ -325,6 +325,12 @@
+         rect.setHeight( fm.height() );
+     }
+ 
++    // Qt 4.6 seems to have problems with the width too
++    if ( fm.width( d.m_text ) > rect.width() )
++    {
++        rect.setWidth( fm.width( d.m_text ) );
++    }
++
+     // boundingRect sometimes returns negative values so make sure it's at 0, 0
+     rect.moveTo( 0, 0 );
+ 
