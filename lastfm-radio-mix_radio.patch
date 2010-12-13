@@ -1,0 +1,33 @@
+diff -dur -x '*~' last.fm-1.4.2.58240.orig/src/SideBarModel.cpp last.fm-1.4.2.58240/src/SideBarModel.cpp
+--- last.fm-1.4.2.58240.orig/src/SideBarModel.cpp	2007-12-18 15:18:20.000000000 +0100
++++ last.fm-1.4.2.58240/src/SideBarModel.cpp	2010-12-13 09:50:15.000000000 +0100
+@@ -73,7 +73,7 @@
+             case NowPlaying:          return tr("Now Playing");
+             case MyRecommendations:   return tr("My Recommendations");
+             case PersonalRadio:       return tr("My Radio Station");
+-            case LovedTracksRadio:    return tr("My Loved Tracks");
++            case LovedTracksRadio:    return tr("My Mix Radio");
+             case NeighbourhoodRadio:  return tr("My Neighbourhood");
+             case RecentlyPlayed:      return tr("Recently Played");
+             case RecentlyLoved:       return tr("Recently Loved");
+@@ -164,7 +164,7 @@
+             case MyProfile:
+             case MyRecommendations:   return "lastfm://user/" + encoded_username + "/recommended";
+             case PersonalRadio:       return "lastfm://user/" + encoded_username + "/personal";
+-            case LovedTracksRadio:    return "lastfm://user/" + encoded_username + "/loved";
++            case LovedTracksRadio:    return "lastfm://user/" + encoded_username + "/mix";
+             case NeighbourhoodRadio:  return "lastfm://user/" + encoded_username + "/neighbours";
+ 
+             case RecentlyPlayedTrack:
+diff -dur -x '*~' last.fm-1.4.2.58240.orig/src/SideBarView.cpp last.fm-1.4.2.58240/src/SideBarView.cpp
+--- last.fm-1.4.2.58240.orig/src/SideBarView.cpp	2007-12-18 15:18:19.000000000 +0100
++++ last.fm-1.4.2.58240/src/SideBarView.cpp	2010-12-13 09:50:34.000000000 +0100
+@@ -601,7 +601,7 @@
+ 
+         case PlayLovedRadio:
+             The::radio().playStation(
+-                StationUrl( "lastfm://user/" + encoded_display_role + "/loved" ) );
++                StationUrl( "lastfm://user/" + encoded_display_role + "/mix" ) );
+             break;
+ 
+         case PlayUserTagRadio:
