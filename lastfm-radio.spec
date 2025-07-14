@@ -42,12 +42,12 @@ zależności od gustów muzycznych.
 
 %prep
 %setup -q -n last.fm-%{version}
-%patch0 -p1
-%patch1 -p0
-%patch2 -p0
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%patch -P0 -p1
+%patch -P1 -p0
+%patch -P2 -p0
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
 
 %{__sed} -i -e 's#@LIB@#%{_libdir}#g' src/container.cpp src/libMoose/MooseCommon.cpp
 
